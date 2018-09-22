@@ -1,0 +1,22 @@
+{
+  "title": "The New Real Book Vol. 1",
+  "publication": {
+    "date": "1986",
+    "publisher": "Sher Music"
+  },
+  "sheets": [{
+    "title": "All Blues",
+    "credits": [{
+      "role": "composer",
+      "name": "Miles Davis"
+    }],
+    "page": 2
+  },{
+    "title": "Autumn Leaves",
+    "credits": [{
+      "role": "composer",
+      "name": "Joseph Kosma"
+    }],
+    "page": 3
+  }]
+}

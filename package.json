@@ -1,0 +1,21 @@
+{
+  "name": "sheetdex",
+  "version": "1.0.0",
+  "description": "sheetdex, the sheet index",
+  "main": "index.js",
+  "dependencies": {
+    "jsonpath": "^1.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.0",
+    "@babel/core": "^7.1.0",
+    "@babel/node": "^7.0.0",
+    "@babel/preset-env": "^7.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx babel-node index.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
