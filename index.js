@@ -10,7 +10,7 @@ fs.readdirSync('./books').forEach(file => {
 });
 
 // Read book-indices.
-Papa.parse(fs.readFileSync('./book-indices/Index.csv', 'utf8')).data.map(row => {
+Papa.parse(fs.readFileSync('./book-indices.csv', 'utf8')).data.map(row => {
   return {
     title: row[0],
     file: row[1]
