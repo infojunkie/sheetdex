@@ -1,0 +1,4 @@
+[submodule "book-indices"]
+	path = book-indices
+	url = git@github.com:aspiers/book-indices.git
+	branch = master
