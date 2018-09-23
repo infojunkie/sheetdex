@@ -4,7 +4,7 @@
   "description": "sheetdex, the sheet index",
   "main": "index.js",
   "dependencies": {
-    "jsonpath": "^1.0.0",
+    "jsonpath": "git+ssh://git@github.com:movitto/jsonpath.git#expression-scope",
     "papaparse": "^4.6.0"
   },
   "devDependencies": {

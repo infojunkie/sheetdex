@@ -29,9 +29,13 @@ Papa.parse(fs.readFileSync('./book-indices.csv', 'utf8')).data.map(row => {
 
 // Perform query.
 const query = process.argv[2];
-const results = jp.nodes(books, `$..sheets[?(@.title == '${query}')]`).map(sheet => {
+jp.scope({ normalizeCompare: (a,b) => {
+  return a.toLowerCase().includes(b.toLowerCase());
+}});
+const results = jp.nodes(books, `$..sheets[?(normalizeCompare(@.title, '${query}'))]`).map(sheet => {
   return {
     book: books[sheet.path[1]].title,
+    sheet: sheet.value.title,
     page: sheet.value.page
   }
 });
