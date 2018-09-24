@@ -31,7 +31,8 @@ Papa.parse(fs.readFileSync('./books/book-indices.csv', 'utf8')).data.map(row => 
 // Read Jamey Aebersold.
 // http://www.jazzbooks.com/mm5/download/FREE-RAP-133.xls
 books = books.concat(Array.from( Papa.parse(fs.readFileSync('./books/jamey-aebersold.csv', 'utf8'), {
-  skipEmptyLines: true
+  skipEmptyLines: true,
+  header: true
 }).data.reduce((map, row) => {
   // Populate a map (vol # => book struct)
   const vol = row[1];
