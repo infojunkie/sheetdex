@@ -12,13 +12,10 @@
     "@babel/cli": "^7.1.0",
     "@babel/core": "^7.1.0",
     "@babel/node": "^7.0.0",
-    "@babel/plugin-transform-async-to-generator": "^7.1.0",
-    "@babel/preset-env": "^7.1.0",
-    "npm-scripts-help": "^0.8.0"
+    "@babel/preset-env": "^7.1.0"
   },
   "scripts": {
-    "query": "npx babel-node query.js",
-    "help": "npm-scripts-help"
+    "query": "npx babel-node query.js"
   },
   "author": "",
   "license": "ISC"
