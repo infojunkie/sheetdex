@@ -28,7 +28,7 @@ Papa.parse(fs.readFileSync('./books/book-indices.csv', 'utf8')).data.map(row => 
   });
 });
 
-// Read Jamey Aebersold.
+// Read Jamey Aebersold index.
 // http://www.jazzbooks.com/mm5/download/FREE-RAP-133.xls
 books = books.concat(Array.from( Papa.parse(fs.readFileSync('./books/jamey-aebersold.csv', 'utf8'), {
   skipEmptyLines: true,
@@ -63,12 +63,81 @@ books = books.concat(Array.from( Papa.parse(fs.readFileSync('./books/jamey-aeber
         content: { value: row[5]}
       },
       {
-        label: 'Track',
+        label: 'CD Track',
         content: { value: row[6]}
       }
     ]
   });
   map.set(vol, book);
+  return map;
+}, new Map()).values() ));
+
+// Read Guitar Techniques index.
+// https://docs.google.com/spreadsheets/d/1dME8bOIAJL573h4_q1RLFwHJGqG-Y4tP1jrUJZpE9mw
+books = books.concat(Array.from( Papa.parse(fs.readFileSync('./books/guitar-techniques.csv', 'utf8'), {
+  skipEmptyLines: true,
+  header: true
+}).data.reduce((map, sheet) => {
+  // Skip if no page.
+  if (!sheet['Pages']) return map;
+
+  // Populate a map (vol # => book struct)
+  const key = `#${sheet['Guitar Techniques #']} ${sheet['Month']} ${sheet['Year']}`;
+  const book = map.get(key) || {
+    title: `Guitar Techniques ${key}`,
+    publisher: {
+      name: 'Guitar Techniques',
+      date: sheet['Year']
+    },
+    sheets: []
+  };
+  book.sheets.push({
+    title: sheet['Song Name'],
+    page: sheet['Pages'],
+    notes:[
+      {
+        label: 'Performer',
+        content: { value: sheet['Band/ Group Name/ Performer']}
+      },
+      {
+        label: 'Style',
+        content: { value: sheet['Style']}
+      },
+      {
+        label: 'Type',
+        content: { value: sheet['Type']}
+      },
+      {
+        label: 'Key',
+        content: { value: sheet['Key']}
+      },
+      {
+        label: 'Ability',
+        content: { value: sheet['Ability Rating']}
+      },
+      {
+        label: 'Tempo',
+        content: { value: sheet['Tempo']}
+      },
+      {
+        label: 'CD Track',
+        content: { value: sheet['CD']}
+      },
+      {
+        label: 'Tutor',
+        content: { value: sheet['GT Tutor']}
+      },
+      {
+        label: 'Comment',
+        content: { value: sheet['Comment']}
+      },
+      {
+        label: 'Skill',
+        content: { value: sheet['Will Improve Your']}
+      }
+    ]
+  });
+  map.set(key, book);
   return map;
 }, new Map()).values() ));
 
