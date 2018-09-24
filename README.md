@@ -12,6 +12,7 @@ An app to locate sheet music within book volumes.
 
 # Usage
 ```
+$ git clone --recurse-submodules git@github.com:infojunkie/sheetdex.git && cd sheetdex && npm i
 $ npm run query "autumn leaves"
 
 > sheetdex@1.0.0 query /media/kratib/data/src/infojunkie/sheetdex
