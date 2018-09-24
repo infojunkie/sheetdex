@@ -38,32 +38,33 @@ books = books.concat(Array.from( Papa.parse(fs.readFileSync('./books/jamey-aeber
   const vol = sheet['Vol #'];
   const book = map.get(vol) || {
     title: `Jamey Aebersold Play-Along Vol. ${vol}`,
-    publisher: {
-      name: 'Jamey Aebersold'
-    },
+    notes: [{
+      type: 'publisher',
+      value: 'Jamey Aebersold'
+    }],
     sheets: []
   };
   book.sheets.push({
     title: sheet['Tune Title'],
     notes:[
       {
-        type: 'Style',
+        type: 'style',
         value: sheet['Vehicle Type']
       },
       {
-        type: 'Key',
+        type: 'key',
         value: sheet['Key']
       },
       {
-        type: 'Tempo',
+        type: 'tempo',
         value: sheet['Tempo']
       },
       {
-        type: 'Choruses',
+        type: 'count-choruses',
         value: sheet['# of choruses']
       },
       {
-        type: 'CD Track',
+        type: 'cd-track',
         value: sheet['CD Track #']
       }
     ]
@@ -85,10 +86,16 @@ books = books.concat(Array.from( Papa.parse(fs.readFileSync('./books/guitar-tech
   const key = `${sheet['Guitar Techniques #']} ${sheet['Month']} ${sheet['Year']}`;
   const book = map.get(key) || {
     title: `Guitar Techniques ${key}`,
-    publisher: {
-      name: 'Guitar Techniques',
-      date: sheet['Year']
-    },
+    notes: [
+      {
+        type: 'publisher',
+        value: 'Guitar Techniques'
+      },
+      {
+        type: 'date',
+        value: sheet['Year']
+      }
+    ],
     sheets: []
   };
   book.sheets.push({
@@ -96,43 +103,43 @@ books = books.concat(Array.from( Papa.parse(fs.readFileSync('./books/guitar-tech
     page: sheet['Pages'],
     notes:[
       {
-        type: 'Performer',
+        type: 'performer',
         value: sheet['Band/ Group Name/ Performer']
       },
       {
-        type: 'Style',
+        type: 'style',
         value: sheet['Style']
       },
       {
-        type: 'Type',
+        type: 'type',
         value: sheet['Type']
       },
       {
-        type: 'Key',
+        type: 'key',
         value: sheet['Key']
       },
       {
-        type: 'Ability',
+        type: 'ability',
         value: sheet['Ability Rating']
       },
       {
-        type: 'Tempo',
+        type: 'tempo',
         value: sheet['Tempo']
       },
       {
-        type: 'CD Track',
+        type: 'cd-track',
         value: sheet['CD']
       },
       {
-        type: 'Tutor',
+        type: 'instructor',
         value: sheet['GT Tutor']
       },
       {
-        type: 'Comment',
+        type: 'comment',
         value: sheet['Comment']
       },
       {
-        type: 'Skill',
+        type: 'skill',
         value: sheet['Will Improve Your']
       }
     ]

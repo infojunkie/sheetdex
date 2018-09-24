@@ -58,18 +58,10 @@ note: {
 
 volumes: [{
   title: text
-  publication: {
-    date: date
-    publisher: text
-  }
   notes: [note]
   sheets: [{
     title: text
     page: text ("page" or "page1-page2")
-    credits: [{
-      role: text
-      name: text
-    }]
     notes: [note]
   }]
 }]
