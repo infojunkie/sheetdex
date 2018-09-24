@@ -33,9 +33,9 @@ Papa.parse(fs.readFileSync('./books/book-indices.csv', 'utf8')).data.map(row => 
 books = books.concat(Array.from( Papa.parse(fs.readFileSync('./books/jamey-aebersold.csv', 'utf8'), {
   skipEmptyLines: true,
   header: true
-}).data.reduce((map, row) => {
+}).data.reduce((map, sheet) => {
   // Populate a map (vol # => book struct)
-  const vol = row[1];
+  const vol = sheet['Vol #'];
   const book = map.get(vol) || {
     title: `Jamey Aebersold Play-Along Vol. ${vol}`,
     publisher: {
@@ -44,27 +44,27 @@ books = books.concat(Array.from( Papa.parse(fs.readFileSync('./books/jamey-aeber
     sheets: []
   };
   book.sheets.push({
-    title: row[0],
+    title: sheet['Tune Title'],
     notes:[
       {
-        label: 'Style',
-        content: { value: row[2]}
+        type: 'Style',
+        value: sheet['Vehicle Type']
       },
       {
-        label: 'Key',
-        content: { value: row[3]}
+        type: 'Key',
+        value: sheet['Key']
       },
       {
-        label: 'Tempo',
-        content: { value: row[4]}
+        type: 'Tempo',
+        value: sheet['Tempo']
       },
       {
-        label: 'Choruses',
-        content: { value: row[5]}
+        type: 'Choruses',
+        value: sheet['# of choruses']
       },
       {
-        label: 'CD Track',
-        content: { value: row[6]}
+        type: 'CD Track',
+        value: sheet['CD Track #']
       }
     ]
   });
@@ -81,8 +81,8 @@ books = books.concat(Array.from( Papa.parse(fs.readFileSync('./books/guitar-tech
   // Skip if no page.
   if (!sheet['Pages']) return map;
 
-  // Populate a map (vol # => book struct)
-  const key = `#${sheet['Guitar Techniques #']} ${sheet['Month']} ${sheet['Year']}`;
+  // Populate a map (key => book struct)
+  const key = `${sheet['Guitar Techniques #']} ${sheet['Month']} ${sheet['Year']}`;
   const book = map.get(key) || {
     title: `Guitar Techniques ${key}`,
     publisher: {
@@ -96,44 +96,44 @@ books = books.concat(Array.from( Papa.parse(fs.readFileSync('./books/guitar-tech
     page: sheet['Pages'],
     notes:[
       {
-        label: 'Performer',
-        content: { value: sheet['Band/ Group Name/ Performer']}
+        type: 'Performer',
+        value: sheet['Band/ Group Name/ Performer']
       },
       {
-        label: 'Style',
-        content: { value: sheet['Style']}
+        type: 'Style',
+        value: sheet['Style']
       },
       {
-        label: 'Type',
-        content: { value: sheet['Type']}
+        type: 'Type',
+        value: sheet['Type']
       },
       {
-        label: 'Key',
-        content: { value: sheet['Key']}
+        type: 'Key',
+        value: sheet['Key']
       },
       {
-        label: 'Ability',
-        content: { value: sheet['Ability Rating']}
+        type: 'Ability',
+        value: sheet['Ability Rating']
       },
       {
-        label: 'Tempo',
-        content: { value: sheet['Tempo']}
+        type: 'Tempo',
+        value: sheet['Tempo']
       },
       {
-        label: 'CD Track',
-        content: { value: sheet['CD']}
+        type: 'CD Track',
+        value: sheet['CD']
       },
       {
-        label: 'Tutor',
-        content: { value: sheet['GT Tutor']}
+        type: 'Tutor',
+        value: sheet['GT Tutor']
       },
       {
-        label: 'Comment',
-        content: { value: sheet['Comment']}
+        type: 'Comment',
+        value: sheet['Comment']
       },
       {
-        label: 'Skill',
-        content: { value: sheet['Will Improve Your']}
+        type: 'Skill',
+        value: sheet['Will Improve Your']
       }
     ]
   });
@@ -154,4 +154,7 @@ const results = jp.nodes(books, `$..sheets[?(normalizeCompare(@.title, '${query}
     page: sheet.value.page || '(unknown)'
   }
 });
+
+// Print results.
+//console.log(`Books:`, books.map(book => book.title));
 console.log(`Query: ${query}\n\n`, results);
