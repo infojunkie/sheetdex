@@ -8,9 +8,6 @@ export function indexGuitarTechniques() {
     skipEmptyLines: true,
     header: true
   }).data.reduce((map, sheet) => {
-    // Skip if no page.
-    if (!sheet['Pages']) return map;
-
     // Populate a map (key => book struct)
     const key = `${sheet['Guitar Techniques #']} ${sheet['Month']} ${sheet['Year']}`;
     const book = map.get(key) || {
