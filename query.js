@@ -142,7 +142,8 @@ books = books.concat(Array.from( Papa.parse(fs.readFileSync('./books/guitar-tech
 }, new Map()).values() ));
 
 // Perform query.
-const query = process.argv[2];
+if (!process.argv[2]) { console.error("No query"); process.exit(0); }
+const query = process.argv[2].replace("'", "\\'");
 jp.scope({ normalizeCompare: (a,b) => {
   return a.toLowerCase().includes(b.toLowerCase());
 }});
@@ -153,4 +154,4 @@ const results = jp.nodes(books, `$..sheets[?(normalizeCompare(@.title, '${query}
     page: sheet.value.page || '(unknown)'
   }
 });
-console.log(results);
+console.log(`Query: ${query}\n\n`, results);
