@@ -10,33 +10,6 @@ An app to locate sheet music within book volumes.
 - Parse existing indexes
 - Support flexible metadata
 
-# Model
-
-```
-note: {
-  type: text
-  value: text or json
-}
-
-volumes: [{
-  title: text
-  publication: {
-    date: date
-    publisher: text
-  }
-  notes: [note]
-  sheets: [{
-    title: text
-    page: text ("page" or "page1-page2")
-    credits: [{
-      role: text
-      name: text
-    }]
-    notes: [note]
-  }]
-}]
-```
-
 # Usage
 ```
 $ npm run query "autumn leaves"
@@ -73,4 +46,31 @@ Query: autumn leaves
   { book: 'Guitar Techniques 224 December 2013',
     sheet: 'Autumn Leaves',
     page: '38-43' } ]
+```
+
+# Model
+
+```
+note: {
+  type: text
+  value: text or json
+}
+
+volumes: [{
+  title: text
+  publication: {
+    date: date
+    publisher: text
+  }
+  notes: [note]
+  sheets: [{
+    title: text
+    page: text ("page" or "page1-page2")
+    credits: [{
+      role: text
+      name: text
+    }]
+    notes: [note]
+  }]
+}]
 ```
