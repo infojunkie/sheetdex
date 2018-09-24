@@ -56,7 +56,7 @@ note: {
   value: text or json
 }
 
-volumes: [{
+book: {
   title: text
   notes: [note]
   sheets: [{
@@ -64,5 +64,5 @@ volumes: [{
     page: text ("page" or "page1-page2")
     notes: [note]
   }]
-}]
+}
 ```

@@ -163,5 +163,4 @@ const results = jp.nodes(books, `$..sheets[?(normalizeCompare(@.title, '${query}
 });
 
 // Print results.
-//console.log(`Books:`, books.map(book => book.title));
 console.log(`Query: ${query}\n\n`, results);
