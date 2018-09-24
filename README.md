@@ -4,11 +4,11 @@ sheetdex
 An app to locate sheet music within book volumes.
 
 # Use cases
-- Find all sheets of the song "Autumn Leaves" returns the Real Book location, Jamey Aebersold versions, Guitar Techniques entries
-- Find all sheets by composer "Thelonious Monk"
-- Find all sheets by arranger "Nelson Faria"
-- Parse existing indexes
-- Support flexible metadata
+- [x] Find all sheets of the song "Autumn Leaves" returns the Real Book location, Jamey Aebersold versions, Guitar Techniques entries
+- [ ] Find all sheets by composer "Thelonious Monk"
+- [ ] Find all sheets by arranger "Nelson Faria"
+- [x] Parse existing indexes
+- [x] Support flexible metadata
 
 # Usage
 ```
