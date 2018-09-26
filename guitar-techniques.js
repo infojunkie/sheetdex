@@ -1,9 +1,10 @@
+// Guitar Techniques
+// https://docs.google.com/spreadsheets/d/1dME8bOIAJL573h4_q1RLFwHJGqG-Y4tP1jrUJZpE9mw
+
 import Papa from 'papaparse';
 import fs from 'fs';
 
-export function indexGuitarTechniques() {
-  // Read Guitar Techniques index.
-  // https://docs.google.com/spreadsheets/d/1dME8bOIAJL573h4_q1RLFwHJGqG-Y4tP1jrUJZpE9mw
+export default function index() {
   return Array.from( Papa.parse(fs.readFileSync('./books/guitar-techniques.csv', 'utf8'), {
     skipEmptyLines: true,
     header: true

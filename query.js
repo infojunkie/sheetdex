@@ -1,18 +1,17 @@
-import jp from 'jsonpath';
-import { indexBookIndices } from './book-indices';
-import { indexJameyAebersold } from './jamey-aebersold';
-import { indexGuitarTechniques } from './guitar-techniques';
+// Query command
 
-// Build our index.
-const books = indexBookIndices()
-  .concat(indexJameyAebersold())
-  .concat(indexGuitarTechniques());
+import jp from 'jsonpath';
+import normalize from 'nlcst-normalize';
+import indexBooks from './index';
+
+// Build the index.
+const books = indexBooks();
 
 // Perform query.
 if (!process.argv[2]) { console.error("No query"); process.exit(0); }
 const query = process.argv[2].replace("'", "\\'");
 jp.scope({ normalizeCompare: (a,b) => {
-  return a.toLowerCase().includes(b.toLowerCase());
+  return normalize(a).includes(normalize(b));
 }});
 const results = jp.nodes(books, `$..sheets[?(normalizeCompare(@.title, '${query}'))]`).map(sheet => {
   return {

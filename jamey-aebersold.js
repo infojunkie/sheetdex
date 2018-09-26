@@ -1,9 +1,10 @@
+// Jamey Aebersold Reference
+// http://www.jazzbooks.com/mm5/download/FREE-RAP-133.xls
+
 import Papa from 'papaparse';
 import fs from 'fs';
 
-export function indexJameyAebersold() {
-  // Read Jamey Aebersold index.
-  // http://www.jazzbooks.com/mm5/download/FREE-RAP-133.xls
+export default function index() {
   return Array.from( Papa.parse(fs.readFileSync('./books/jamey-aebersold.csv', 'utf8'), {
     skipEmptyLines: true,
     header: true
