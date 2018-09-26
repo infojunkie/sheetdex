@@ -1,4 +1,4 @@
-// Real Book Song Finder
+// Real Book Songfinder
 // https://www.halleonard.com/search/search.action?seriesfeature=REALBK
 // https://www.halleonard.com/bin/MiscRealbksongfndr2018.pdf
 //
@@ -29,7 +29,10 @@ export default function index() {
     // Iterate on each book found.
     match[2].match(/\d+/g).forEach(vol => {
       const book = books.get(vol);
-      if (!book) { console.error(`Real Book Song Finder: Book ${vol} not found in index. Skipping.`); return; }
+      if (!book) {
+        console.error(`Real Book Songfinder: Book ${vol} not found in index. Skipping tune ${match[1]}.`);
+        return;
+      }
       book.sheets.push({
         title: match[1].trim().replace(/(\r\n\t|\n|\r\t)/gm, '')
       });
