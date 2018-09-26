@@ -5,12 +5,6 @@
 // Convert to text and cleanup
 // `pdftotext MiscRealbksongfndr2018.pdf books/readbook-songfinder.txt`
 // `sed 's/[\x01-\x7F]//g' -i books/realbook-songfinder.txt`
-//
-// Get the list of books
-// /(\d{2})\. (.*?)( • \d*)?$/gm
-//
-// Get the list of tunes
-// /(.+?|.{2,}?[\s].*?)\(([\d, ]+)\)/g
 
 import fs from 'fs';
 
