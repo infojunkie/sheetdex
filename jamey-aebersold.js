@@ -5,7 +5,7 @@ import Papa from 'papaparse';
 import fs from 'fs';
 
 export default function index() {
-  return Array.from( Papa.parse(fs.readFileSync('./books/jamey-aebersold.csv', 'utf8'), {
+  return Array.from(Papa.parse(fs.readFileSync('./books/jamey-aebersold.csv', 'utf8'), {
     skipEmptyLines: true,
     header: true
   }).data.reduce((map, sheet) => {
@@ -46,5 +46,5 @@ export default function index() {
     });
     map.set(vol, book);
     return map;
-  }, new Map()).values() );
+  }, new Map()).values());
 }
