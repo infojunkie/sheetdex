@@ -18,6 +18,7 @@ $ npm run query "autumn leaves"
 > sheetdex@1.0.0 query /media/kratib/data/src/infojunkie/sheetdex
 > npx babel-node query.js "autumn leaves"
 
+WARNING: At least one sheet has conflicts in the index. Turn on DEBUG envvar to see more details.
 Query: autumn leaves
 
  [ { book: 'Colorado Cookbook, The',
@@ -31,13 +32,7 @@ Query: autumn leaves
   { book: 'The Real Vocal Book – Volume I',
     sheet: 'Autumn Leaves',
     page: '53' },
-  { book: 'The Real Book – Volume I',
-    sheet: 'Autumn Leaves',
-    page: '(unknown)' },
   { book: 'The Real Jazz Solos Book',
-    sheet: 'Autumn Leaves',
-    page: '(unknown)' },
-  { book: 'The Real Vocal Book – Volume I',
     sheet: 'Autumn Leaves',
     page: '(unknown)' },
   { book: 'Real Vocal Book, Vol. 1',
@@ -52,7 +47,7 @@ Query: autumn leaves
   { book: 'Ultimate Jazz Fakebook',
     sheet: 'Autumn Leaves (Les Feuilles Mortes)',
     page: '(unknown)' },
-  { book: 'Jazz of the 50\'s',
+  { book: 'Jazz of the 50s',
     sheet: 'Autumn Leaves (Les Feuilles Mortes)',
     page: '(unknown)' },
   { book: 'Real Book 6th Ed.',
@@ -97,10 +92,7 @@ Query: autumn leaves
     page: '10' },
   { book: 'Anthologie - Chords',
     sheet: 'Autumn Leaves',
-    page: '25' },
-  { book: 'Jamey Aebersold Play-Along Vol. 44',
-    sheet: 'Autumn Leaves',
-    page: '(unknown)' } ]
+    page: '25' } ]
 ```
 
 # Model
