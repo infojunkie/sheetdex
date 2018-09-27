@@ -53,7 +53,7 @@ export default function index() {
           // Report conflict if they differ
           if (existingSheet.page && sheet.page && existingSheet.page !== sheet.page) {
             if (process.env.DEBUG) {
-              console.error(`WARNING: Sheet "${sheet.title}" in book ${book.title} in ${existingBook.index} has page ${existingSheet.page} whereas in index ${book.index} it has page ${sheet.page}.`);
+              console.error(`WARNING: Sheet "${sheet.title}" in book "${book.title}" in ${existingBook.index} has page ${existingSheet.page} whereas in index ${book.index} it has page ${sheet.page}.`);
             } else {
               if (!_conflict) {
                 // Warn the user once.

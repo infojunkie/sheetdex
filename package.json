@@ -2,7 +2,7 @@
   "name": "sheetdex",
   "version": "1.0.0",
   "description": "sheetdex, the sheet index",
-  "main": "index.js",
+  "main": "query.js",
   "dependencies": {
     "glob": "^7.1.3",
     "jsonpath": "git+ssh://git@github.com:movitto/jsonpath.git#expression-scope",
