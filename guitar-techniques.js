@@ -13,6 +13,7 @@ export default function index() {
     const key = `${sheet['Guitar Techniques #']} ${sheet['Month']} ${sheet['Year']}`;
     const book = map.get(key) || {
       title: `Guitar Techniques ${key}`,
+      index: 'guitar-techniques',
       notes: [
         {
           type: 'publisher',

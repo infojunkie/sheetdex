@@ -19,6 +19,7 @@ export default function index() {
   while (match = rebooks.exec(file)) {
     books.set(match[1], {
       title: match[2],
+      index: 'realbook-songfinder',
       sheets: []
     });
   }

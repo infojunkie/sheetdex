@@ -12,6 +12,7 @@ export default function index() {
     const vol = sheet[0];
     const book = map.get(vol) || {
       title: vol,
+      index: 'bob-keller',
       sheets: []
     };
     book.sheets.push({

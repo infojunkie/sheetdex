@@ -13,6 +13,7 @@ export default function index() {
     const vol = sheet['Vol #'];
     const book = map.get(vol) || {
       title: `Jamey Aebersold Play-Along Vol. ${vol}`,
+      index: 'jamey-aebersold',
       notes: [{
         type: 'publisher',
         value: 'Jamey Aebersold'

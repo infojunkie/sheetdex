@@ -21,6 +21,7 @@ export default function index() {
       // Populate the book map.
       const book = map.get(key) || {
         title: key,
+        index: 'jazz-standards-az',
         sheets: []
       };
       book.sheets.push({

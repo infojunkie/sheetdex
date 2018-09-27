@@ -13,6 +13,7 @@ export default function index() {
   }).map(book => {
     return {
       title: book.title,
+      index: 'book-indices',
       sheets: Papa.parse(fs.readFileSync(`./books/book-indices/${book.file}`, 'utf8')).data.map(row => {
         return {
           title: row[0],
