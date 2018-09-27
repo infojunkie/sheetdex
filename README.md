@@ -108,7 +108,7 @@ book: {
   notes: [note]
   sheets: [{
     title: text
-    page: text ("page" or "page1-page2")
+    page: text or [text] in case of conflicts
     notes: [note]
   }]
 }

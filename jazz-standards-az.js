@@ -17,7 +17,8 @@ export default function index() {
           page: null
         } : {
           key: k,
-          page: col[k]
+          // Special case: a page number 'x' means undefined.
+          page: (col[k] !== 'x') ? col[k] : undefined
         };
       // Populate the book map.
       const book = map.get(key) || {
