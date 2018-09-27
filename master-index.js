@@ -1,5 +1,6 @@
-// Index builder
+// Master index builder
 
+import fs from 'fs';
 import normalize from 'nlcst-normalize';
 import indexBookIndices from './book-indices';
 import indexJameyAebersold from './jamey-aebersold';
@@ -12,7 +13,17 @@ import indexJazzStandardsAZ from './jazz-standards-az';
 let _conflict = false;
 
 export default function index() {
-  return Array.from(indexBookIndices()
+  // Read cached index first.
+  try {
+    return JSON.parse(fs.readFileSync('./books/master-index.json', 'utf8'));
+  }
+  catch (e) {
+    // It's ok: we'll create the index from scratch.
+    if (process.env.DEBUG) console.log('DEBUG: Master index cache not found. Recreating...')
+  }
+
+  // Otherwise rebuild it and save it.
+  const masterIndex = Array.from(indexBookIndices()
   .concat(indexRealBookSongFinder())
   .concat(indexBobKeller())
   .concat(indexJameyAebersold())
@@ -42,7 +53,7 @@ export default function index() {
           // Report conflict if they differ
           if (existingSheet.page && sheet.page && existingSheet.page !== sheet.page) {
             if (process.env.DEBUG) {
-              console.error(`Sheet "${sheet.title}" in book ${book.title} in ${existingBook.index} has page ${existingSheet.page} whereas in index ${book.index} it has page ${sheet.page}. Arbitrarily choosing second one :-(`);
+              console.error(`WARNING: Sheet "${sheet.title}" in book ${book.title} in ${existingBook.index} has page ${existingSheet.page} whereas in index ${book.index} it has page ${sheet.page}.`);
             } else {
               if (!_conflict) {
                 // Warn the user once.
@@ -50,6 +61,7 @@ export default function index() {
                 _conflict = true;
               }
             }
+            sheet.page = [].concat(existingSheet.page, sheet.page);
           } else {
             sheet.page = existingSheet.page || sheet.page;
           }
@@ -68,4 +80,7 @@ export default function index() {
     map.set(key, book);
     return map;
   }, new Map()).values());
+
+  fs.writeFileSync('./books/master-index.json', JSON.stringify(masterIndex, null, 2));
+  return masterIndex;
 }

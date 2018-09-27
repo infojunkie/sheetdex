@@ -2,10 +2,10 @@
 
 import jp from 'jsonpath';
 import normalize from 'nlcst-normalize';
-import indexBooks from './index';
+import masterIndex from './master-index';
 
 // Build the index.
-const books = indexBooks();
+const books = masterIndex();
 
 // Perform query.
 if (!process.argv[2]) { console.error("No query"); process.exit(0); }
