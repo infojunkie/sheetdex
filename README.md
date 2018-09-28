@@ -105,6 +105,7 @@ note: {
 
 book: {
   title: text
+  index: text or [text]
   notes: [note]
   sheets: [{
     title: text
