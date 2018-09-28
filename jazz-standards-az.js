@@ -14,7 +14,7 @@ export default function index() {
       const { key, page } = (k === 'Aebersold Volume') ?
         {
           key: `Jamey Aebersold Play-Along Vol. ${col[k]}`,
-          page: null
+          page: undefined
         } : {
           key: k,
           // Special case: a page number 'x' means undefined.

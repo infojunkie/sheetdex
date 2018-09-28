@@ -39,7 +39,7 @@ export default function index() {
     if (existingBook) {
       // Merge book notes
       // just concatenate them for now
-      book.notes = [].concat(existingBook.notes, book.notes);
+      book.notes = (existingBook.notes || book.notes) ? [].concat(existingBook.notes, book.notes).filter(n => n) : undefined;
 
       // Merge sheets
       // Iterate on them and find collisions
@@ -63,12 +63,12 @@ export default function index() {
             }
             sheet.page = [].concat(existingSheet.page, sheet.page);
           } else {
-            sheet.page = existingSheet.page || sheet.page;
+            sheet.page = existingSheet.page || sheet.page || undefined;
           }
 
           // Merge sheet notes
           // just concatenate them for now
-          sheet.notes = [].concat(existingSheet.notes, sheet.notes);
+          sheet.notes = (existingSheet.notes || sheet.notes) ? [].concat(existingSheet.notes, sheet.notes).filter(n => n) : undefined;
         }
         sheetMap.set(sheetKey, sheet);
         return sheetMap;

@@ -28,7 +28,7 @@ export default function index() {
     };
     book.sheets.push({
       title: sheet['Song Name'],
-      page: sheet['Pages'],
+      page: sheet['Pages'] || undefined,
       notes:[
         {
           type: 'performer',
