@@ -11,15 +11,16 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.enable('trust proxy');
+app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
   console.log(`[${(new Date()).toISOString()}] ${req.ip} ${req.get('User-Agent')}: ${req.query.query || '(empty)'}`);
   spawnExpress('npm', ['run', 'query', req.query.query || ''], (code, output) => {
-    res.set('Content-Type', 'text/plain');
-    res.send(output);
+    res.render('form', { query: req.query.query, output: output });
   });
 });
 
+// https://github.com/apex/up-examples/tree/master/oss/node-express-spawn
 function spawnExpress(pgm, args, done) {
   const run = spawn(pgm, args);
 
