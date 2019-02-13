@@ -20,4 +20,4 @@ const results = jp.nodes(books, `$..sheets[?(normalizeCompare(@.title, '${query}
     page: sheet.value.page || '(unknown)'
   }
 });
-console.log(`Query: ${query}\n\n`, results);
+console.info(JSON.stringify(results, null, 2));

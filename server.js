@@ -16,7 +16,8 @@ app.set('view engine', 'ejs');
 app.get('/', (req, res) => {
   console.log(`[${(new Date()).toISOString()}] ${req.ip} ${req.get('User-Agent')}: ${req.query.query || '(empty)'}`);
   spawnExpress('npm', ['run', 'query', req.query.query || ''], (code, output) => {
-    res.render('form', { query: req.query.query, output: output });
+    const results = output.split('\n').slice(3).join('\n');
+    res.render('form', { query: req.query.query, results: results });
   });
 });
 

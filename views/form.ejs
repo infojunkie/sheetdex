@@ -2,6 +2,9 @@
 <html>
 <head>
 <title>Sheetdex</title>
+<script type="text/javascript" src="https://gitcdn.link/repo/ag-grid/ag-grid/master/dist/ag-grid-community.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://gitcdn.link/repo/ag-grid/ag-grid/master/dist/styles/ag-grid.css">
+<link rel="stylesheet" type="text/css" href="https://gitcdn.link/repo/ag-grid/ag-grid/master/dist/styles/ag-theme-balham.css">
 </head>
 <body>
 <h1>Sheetdex</h1>
@@ -12,9 +15,23 @@
   </div>
   <input type="submit" value="Submit">
 </form>
-<h2>Output</h2>
-<pre>
-<%= output %>
-</pre>
+<h2>Results</h2>
+<div id="myGrid" style="max-height: 100%;width: 100%" class="ag-theme-balham"></div>
+<script>
+const gridOptions = {
+  defaultColDef: {
+      resizable: true
+  },
+  columnDefs: [
+    {headerName: 'Book', field: 'book', sortable: true},
+    {headerName: 'Sheet', field: 'sheet', sortable: true},
+    {headerName: 'Page', field: 'page'}
+  ],
+  rowData: <%- results %>
+};
+let eGridDiv = document.querySelector('#myGrid');
+console.log(eGridDiv);
+new agGrid.Grid(eGridDiv, gridOptions);
+</script>
 </body>
 </html>
