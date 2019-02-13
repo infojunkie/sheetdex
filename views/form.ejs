@@ -8,7 +8,8 @@
 </head>
 <body>
 <h1>Sheetdex</h1>
-<h2>Query</h2>
+Search for sheet music in a large collection of fake and real books.
+<h2>Sheet title</h2>
 <form action="/" method="get">
   <div>
     <input type="text" name="query" size="80" value="<%= query %>">
@@ -23,8 +24,8 @@ const gridOptions = {
       resizable: true
   },
   columnDefs: [
-    {headerName: 'Book', field: 'book', sortable: true},
     {headerName: 'Sheet', field: 'sheet', sortable: true},
+    {headerName: 'Book', field: 'book', sortable: true},
     {headerName: 'Page', field: 'page'}
   ],
   rowData: <%- results %>

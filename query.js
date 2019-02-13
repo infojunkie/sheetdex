@@ -8,7 +8,7 @@ import masterIndex from './master-index';
 const books = masterIndex();
 
 // Perform query.
-if (process.argv.length <= 2 || !process.argv[2]) { console.error("No query"); process.exit(0); }
+if (process.argv.length <= 2 || !process.argv[2]) { console.error("No query"); process.exit(1); }
 const query = process.argv.slice(2).join(' ').replace("'", "\\'");
 jp.scope({ normalizeCompare: (a,b) => {
   return normalize(a).includes(normalize(b));
