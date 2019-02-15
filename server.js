@@ -2,14 +2,32 @@
 
 import { spawn } from 'child_process';
 import express from 'express';
+import http from 'http';
+import https from 'https';
 import bodyParser from 'body-parser';
 import querystring from 'querystring';
 import favicon from 'serve-favicon';
 import jp from 'jsonpath';
 import normalize from 'nlcst-normalize';
 import masterIndex from './master-index';
+import config from './config';
+import fs from 'fs';
 
 const {PORT = 8080} = process.env;
+
+const credentials = {
+  key: null,
+  cert: null,
+  ca: null
+};
+if (config.ssl) {
+  try {
+    credentials.key = fs.readFileSync(config.ssl.key);
+    credentials.cert = fs.readFileSync(config.ssl.cert);
+    credentials.ca = fs.readFileSync(config.ssl.ca);
+  }
+  catch (e) {}
+}
 
 const app = express();
 app.use(favicon(__dirname + '/favicon.ico'));
@@ -41,6 +59,15 @@ app.get('/', (req, res) => {
   res.render('form', { query: req.query.query, results: query(req.query.query) });
 });
 
-const server = app.listen(PORT, function() {
-  console.log(`Sheetdex is listening on port ${PORT}...`);
-});
+if (!credentials.key) {
+  const httpServer = http.createServer(app);
+  httpServer.listen(PORT, () => {
+    console.log(`Sheetdex is listening on HTTP port ${PORT}...`);
+  });
+}
+else {
+  const httpsServer = https.createServer(credentials, app);
+  httpsServer.listen(PORT, () => {
+    console.log(`Sheetdex is listening on HTTPS port ${PORT}...`);
+  });
+}

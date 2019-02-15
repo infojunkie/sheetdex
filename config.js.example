@@ -1,0 +1,7 @@
+export default {
+  ssl: {
+    cert: '/path/to/cert.pem',
+    key: '/path/to/privkey.pem',
+    ca: '/path/to/chain.pem'
+  }
+}
