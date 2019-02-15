@@ -5,6 +5,9 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import querystring from 'querystring';
 import favicon from 'serve-favicon';
+import jp from 'jsonpath';
+import normalize from 'nlcst-normalize';
+import masterIndex from './master-index';
 
 const {PORT = 8080} = process.env;
 
@@ -15,32 +18,28 @@ app.use(bodyParser.json());
 app.enable('trust proxy');
 app.set('view engine', 'ejs');
 
-app.get('/', (req, res) => {
-  console.log(`[${(new Date()).toISOString()}] ${req.ip} ${req.get('User-Agent')}: ${req.query.query || '(empty)'}`);
-  spawnExpress('npm', ['run', 'query', req.query.query || ''], (code, output) => {
-    if (code > 0) console.error(output);
-    const results = code > 0 ? "[]" : output.split('\n').slice(3).join('\n');
-    res.render('form', { query: req.query.query, results: results });
-  });
-});
+// Build the index.
+console.log("Building index...");
+const books = masterIndex();
+jp.scope({ normalizeCompare: (a,b) => {
+  return normalize(a).includes(normalize(b));
+}});
 
-// https://github.com/apex/up-examples/tree/master/oss/node-express-spawn
-function spawnExpress(pgm, args, done) {
-  const run = spawn(pgm, args);
-
-  let output = '';
-  run.stdout.on('data', (data) => {
-    output += `${data}`;
-  });
-
-  run.stderr.on('data', (data) => {
-    output += `${data}`;
-  });
-
-  run.on('close', (code) => {
-    done(code, output);
+function query(query) {
+  if (!query || query.length < 3) return [];
+  return jp.nodes(books, `$..sheets[?(normalizeCompare(@.title, '${query}'))]`).map(sheet => {
+    return {
+      book: books[sheet.path[1]].title,
+      sheet: sheet.value.title,
+      page: sheet.value.page || '(unknown)'
+    }
   });
 }
+
+app.get('/', (req, res) => {
+  console.log(`[${(new Date()).toISOString()}] ${req.ip} ${req.get('User-Agent')}: ${req.query.query || '(empty)'}`);
+  res.render('form', { query: req.query.query, results: query(req.query.query) });
+});
 
 const server = app.listen(PORT, function() {
   console.log(`Sheetdex is listening on port ${PORT}...`);

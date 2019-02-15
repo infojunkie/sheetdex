@@ -29,7 +29,7 @@ const gridOptions = {
     {headerName: 'Book', field: 'book', sortable: true},
     {headerName: 'Page', field: 'page'}
   ],
-  rowData: <%- results %>
+  rowData: <%- JSON.stringify(results) %>
 };
 let eGridDiv = document.querySelector('#myGrid');
 new agGrid.Grid(eGridDiv, gridOptions);
