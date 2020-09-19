@@ -59,15 +59,7 @@ app.get('/', (req, res) => {
   res.render('form', { query: req.query.query, results: query(req.query.query) });
 });
 
-if (!credentials.key) {
-  const httpServer = http.createServer(app);
-  httpServer.listen(PORT, () => {
-    console.log(`Sheetdex is listening on HTTP port ${PORT}...`);
-  });
-}
-else {
-  const httpsServer = https.createServer(credentials, app);
-  httpsServer.listen(PORT, () => {
-    console.log(`Sheetdex is listening on HTTPS port ${PORT}...`);
-  });
-}
+const server = credentials.key ? https.createServer(credentials, app) : http.createServer(app);
+server.listen(PORT, () => {
+  console.log(`Sheetdex is listening at port ${PORT}...`);
+});
