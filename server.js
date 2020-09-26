@@ -45,7 +45,8 @@ jp.scope({ normalizeCompare: (a,b) => {
 
 function query(query) {
   if (!query || query.length < 3) return [];
-  return jp.nodes(books, `$..sheets[?(normalizeCompare(@.title, '${query}'))]`).map(sheet => {
+  const clean = query.replace("'", "\\'");
+  return jp.nodes(books, `$..sheets[?(normalizeCompare(@.title, '${clean}'))]`).map(sheet => {
     return {
       book: books[sheet.path[1]].title,
       sheet: sheet.value.title,
